@@ -193,30 +193,27 @@ def DPLL(S, I):
         else:
             Ipp[l]=1
         return DPLL(Spp,Ipp)
-# Test enFNC()
-# Descomente el siguiente código y corra el presente archivo
-# formula = "p=(qYr)"
-# print(enFNC(formula)) # Debe obtener qO-pYrO-pY-qO-rOp
 
-# Test Tseitin()
-# Descomente el siguiente código y corra el presente archivo
-# formula = "(p>q)"
-# print(Tseitin(formula, ['p','q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
+def todo(dic):
+    T= {}
+    dic = dic[1]
+    for k in dic.keys():
+        if k in letras:
+            if dic[k]==1:
+                T[k] = dic[k]
 
-# Test Clausula()
-# Descomente el siguiente código y corra el presente archivo
-# c = "pO-qOr"
-# print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
+    return T
 
-# Test formaClausal()
-# Descomente el siguiente código y corra el presente archivo
 letras=["A","G","P","B","b","N","D","H","T","t","S","C","F"]
-f = "((((((A>(GYP))Y((B>b)Y(b>B)))Y(N>(((-DYb)YH)OT)))Y(G>-b))Y(F>(HY-S)))Y(S>(AYC)))Y((t>((bYF)YH))Y((bYF)YH)>t)"
+f = "((((((A>(GYP))Y((B>b)Y(b>B)))Y(N>(((-DYb)YH)OT)))Y((G>b)Y(b>G)))Y(F>(HY-S)))Y(S>(-AYC)))Y((t>((bYF)YH))Y((bYF)YH)>t)"
+print(Tseitin(f, letras))
+print("--------------------------------------------------------------------------------------------------------")
 S = formaClausal(Tseitin(f, letras))
+print(S)
+print("--------------------------------------------------------------------------------------------------------")
 #print(Tseitin(f, letras)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]
 I={}
-# formula = "((((((A>(GYP))Y((B>b)Y(b>B)))Y(N>(((-DYb)YH)OT)))Y(G>-b))Y(F>(HY-S)))Y(S>(AYC)))Y((t>((bYF)YH))Y((bYF)YH)>t)"
-# letras=["A","G","P","B","b","N","D","H","T","t","S","C","F"]
 
-#S = Tseitin(f, letras) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
 print(DPLL(S,I))
+print("---------------------------------------------------------------------------------------------------------")
+print(todo(DPLL(S,I)))
