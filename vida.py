@@ -1,4 +1,5 @@
 from copy import deepcopy
+from PIL import Image
 
 def enFNC(A):
     assert(len(A)==4 or len(A)==7), u"Fórmula incorrecta!"
@@ -203,17 +204,19 @@ def todo(dic):
                 T[k] = dic[k]
 
     return T
+def abrir(img):
+    ruta = ("" + img)
+    imagen = Image.open(ruta)
+    imagen.show()
 
 letras=["A","G","P","B","b","N","D","H","T","t","S","C","F"]
 f = "((((((A>(GYP))Y((B>b)Y(b>B)))Y(N>(((-DYb)YH)OT)))Y((G>b)Y(b>G)))Y(F>(HY-S)))Y(S>(-AYC)))Y((t>((bYF)YH))Y((bYF)YH)>t)"
-print(Tseitin(f, letras))
-print("--------------------------------------------------------------------------------------------------------")
+
 S = formaClausal(Tseitin(f, letras))
-print(S)
-print("--------------------------------------------------------------------------------------------------------")
 #print(Tseitin(f, letras)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]
 I={}
 
-print(DPLL(S,I))
-print("---------------------------------------------------------------------------------------------------------")
+# print(DPLL(S,I))
+# print("---------------------------------------------------------------------------------------------------------")
 print(todo(DPLL(S,I)))
+abrir("modelo1.PNG")
